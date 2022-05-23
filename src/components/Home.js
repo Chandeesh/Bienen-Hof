@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import UserService from "../services/user-service";
-import { Carousel } from "react-bootstrap";
-import home1 from "./home_carousel_1.jpg";
-import home2 from "./home_carousel_2.jpg";
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
   const [content, setContent] = useState("");
+  const { t } = useTranslation();
+
   useEffect(() => {
     UserService.getPublicContent().then(
       (response) => {
@@ -27,8 +27,8 @@ const Home = () => {
         <div class="row">
           <div class="row featurette">
             <div class="col-md-7">
-              <h2 class="featurette-heading">Bees Year</h2>
-              <p class="lead">Take a look and manage bees data for a specific calendar year. Get information about processes happening in all months throughout the year</p>
+              <h2 class="featurette-heading">{t("beesYear")}</h2>
+              <p class="lead">{t("beesYearContent")}</p>
             </div>
             <div class="col-md-5">
               <svg
@@ -59,8 +59,8 @@ const Home = () => {
 
           <div class="row featurette">
             <div class="col-md-7 order-md-2">
-              <h2 class="featurette-heading">Bees Health</h2>
-              <p class="lead">Want to know more about diseases and preventive measures for bees? This section provides all information related to bees health, types of diseases that could affect them and possible preventive measures</p>
+              <h2 class="featurette-heading">{t("beesHealth")}</h2>
+              <p class="lead">{t("beesHealthContent")}</p>
             </div>
             <div class="col-md-5 order-md-1">
               <svg
@@ -93,8 +93,8 @@ const Home = () => {
 
           <div class="row featurette">
             <div class="col-md-7">
-              <h2 class="featurette-heading">My Bees</h2>
-              <p class="lead">Would you like to create a separate stand for your beehive? Sign up immediately and then use this section to create your own stand and manage your beehives data such as breeding, health, honey production and much more</p>
+              <h2 class="featurette-heading">{t("myBees")}</h2>
+              <p class="lead">{t("myBeesContent")}</p>
             </div>
             <div class="col-md-5">
               <svg
@@ -146,8 +146,8 @@ const Home = () => {
 
           <div class="row featurette">
             <div class="col-md-7 order-md-2">
-              <h2 class="featurette-heading">Basic Beekeeping</h2>
-              <p class="lead">Would you like to get introduced to the world of Beekeeping and like to gain information about the basic works? Then hit the signup button to know details such as dealing with bees, hiking, feeding, wax and honeycob and much more</p>
+              <h2 class="featurette-heading">{t("basicBeekeeping")}</h2>
+              <p class="lead">{t("basicBeekeepingContent")}</p>
             </div>
             <div class="col-md-5 order-md-1">
               <svg

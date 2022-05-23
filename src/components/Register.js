@@ -5,6 +5,8 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import { register } from "../actions/auth";
+import { useTranslation } from 'react-i18next';
+
 const required = (value) => {
   if (!value) {
     return (
@@ -42,6 +44,7 @@ const vpassword = (value) => {
   }
 };
 const Register = () => {
+  const { t } = useTranslation();
   const form = useRef();
   const checkBtn = useRef();
   const [username, setUsername] = useState("");
@@ -88,7 +91,7 @@ const Register = () => {
           {!successful && (
             <div>
               <div className="form-group">
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">{t("username")}</label>
                 <Input
                   type="text"
                   className="form-control"
@@ -110,7 +113,7 @@ const Register = () => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">{t("password")}</label>
                 <Input
                   type="password"
                   className="form-control"
@@ -122,9 +125,9 @@ const Register = () => {
               </div>
               <div className="form-group">
               <label htmlFor="password"></label>
-              <label htmlFor="password">Dont have an account yet?</label>
+              <label htmlFor="password">{t("noAccount")}</label>
               <label htmlFor="password"></label>
-                <button className="btn btn-warning btn-block">Sign Up</button>
+                <button className="btn btn-warning btn-block">{t("signup")}</button>
               </div>
             </div>
           )}

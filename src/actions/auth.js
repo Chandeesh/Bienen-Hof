@@ -5,6 +5,7 @@ import {
     LOGIN_FAIL,
     LOGOUT,
     SET_MESSAGE,
+    ACTIVATION_SUCCESS,
   } from "./type";
   import AuthService from "../services/auth-service";
   
@@ -65,6 +66,19 @@ import {
       }
     );
   };
+
+  export const activate = (token) => (dispatch) => {
+    console.log(token);
+   return AuthService.activate(token).then(
+     () => {
+      dispatch({
+        type: ACTIVATION_SUCCESS,
+      });
+      return Promise.resolve();
+     }
+   );
+  };
+
   export const logout = () => (dispatch) => {
     AuthService.logout();
     dispatch({

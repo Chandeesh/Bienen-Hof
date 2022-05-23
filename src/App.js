@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Router, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,16 +7,20 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
+import Activate from "./components/Activate"
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from "./helpers/history";
 import { Navbar, Nav, Container, NavDropdown, FormControl, Button } from 'react-bootstrap';
 import Form from "react-validation/build/form";
 import { MDBFooter } from 'mdb-react-ui-kit';
-import { default as Logo } from './logo.svg';
+import { useTranslation } from 'react-i18next';
 
 const App = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
+  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+
   const dispatch = useDispatch();
   useEffect(() => {
     history.listen((location) => {
@@ -27,6 +31,11 @@ const App = () => {
   const logOut = () => {
     dispatch(logout());
   };
+
+  const changeLanguage = (e) => {
+    console.log(e);
+    i18n.changeLanguage(e);
+  }
   return (
     <Router history={history}>
       <div className="main-wrapper">
@@ -42,7 +51,7 @@ const App = () => {
                 navbarScroll
               >
                 <Link to={"/home"} className="nav-link">
-                  Home
+                  {t("home")}
                 </Link>
                 {currentUser ? (
                   <div className="navbar-nav ml-auto">
@@ -61,21 +70,21 @@ const App = () => {
                   <div className="navbar-nav ml-auto">
                     <li className="nav-item">
                       <Link to={"/login"} className="nav-link">
-                        Login
+                      {t("login")}
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link to={"/register"} className="nav-link">
-                        Sign Up
+                        {t("signup")}
                       </Link>
                     </li>
                   </div>
                 )}
-                <NavDropdown title="Language" id="navbarScrollingDropdown" style={{ paddingRight: '25px' }}>
+                <NavDropdown title={t("language")+"("+i18n.language+")"} onSelect = {changeLanguage} id="navbarScrollingDropdown" style={{ paddingRight: '25px' }}>
 
-                  <NavDropdown.Item href="#action4">English</NavDropdown.Item>
+                  <NavDropdown.Item eventKey="en">English</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">
+                  <NavDropdown.Item eventKey="de">
                     Deutsch
                   </NavDropdown.Item>
                 </NavDropdown>
@@ -83,11 +92,11 @@ const App = () => {
               <Form className="d-flex">
                 <FormControl
                   type="search"
-                  placeholder="Search"
+                  placeholder={t("search")}
                   className="me-2"
-                  aria-label="Search"
+                  aria-label={t("search")}
                 />
-                <Button class="btn success">Search</Button>
+                <Button class="btn success">{t("search")}</Button>
               </Form>
             </Navbar.Collapse>
           </Container>
@@ -98,6 +107,7 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/activate" component={Activate} />
           </Switch>
         </div>
       </div>
@@ -110,7 +120,7 @@ const App = () => {
                   <i className='fas fa-gem me-3'></i>Bienen Hof University
                 </h6>
                 <p>
-                  Re Engineering of Deutscher ImkerBund App to a Web App using React JS and Fastify for the fulfillment of Master Thesis by Hof University Student - Chandeesh
+                 {t("footerContent")}
                 </p>
               </div>
 
@@ -140,7 +150,7 @@ const App = () => {
               </div>
 
               <div className='col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4'>
-                <h6 className='text-uppercase fw-bold mb-4'>Contact</h6>
+                <h6 className='text-uppercase fw-bold mb-4'>{t("contact")}</h6>
                 <p>
                   Alfons-Goppel-Platz 1, 95028 Hof
                 </p>

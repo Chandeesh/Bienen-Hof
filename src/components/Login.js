@@ -1,10 +1,13 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect   } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { login } from "../actions/auth";
+import { useTranslation } from 'react-i18next';
+import { t } from "i18next";
+
 const required = (value) => {
   if (!value) {
     return (
@@ -15,6 +18,7 @@ const required = (value) => {
   }
 };
 const Login = (props) => {
+  const { t } = useTranslation();
   const form = useRef();
   const checkBtn = useRef();
   const [emailId, setUsername] = useState("");
@@ -49,7 +53,7 @@ const Login = (props) => {
     }
   };
   if (isLoggedIn) {
-    return <Redirect  to="/profile" />;
+    return <Redirect to="/profile" />;
   }
   return (
     <div className="col-md-12">
@@ -61,7 +65,7 @@ const Login = (props) => {
         />
         <Form onSubmit={handleLogin} ref={form}>
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">{t("username")}</label>
             <Input
               type="text"
               className="form-control"
@@ -72,7 +76,7 @@ const Login = (props) => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t("password")}</label>
             <Input
               type="password"
               className="form-control"
@@ -83,14 +87,14 @@ const Login = (props) => {
             />
           </div>
           <div className="form-group" >
-          <label htmlFor="password"></label>
-          <a href="password">Forgot Password?</a>
-          <label htmlFor="password"></label>
+            <label htmlFor="password"></label>
+            <a href="password">{t("forgotPassword")}</a>
+            <label htmlFor="password"></label>
             <button className="btn btn-warning btn-block" disabled={loading}>
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}
-              <span>Login</span>
+              <span>{t("login")}</span>
             </button>
           </div>
           {message && (
