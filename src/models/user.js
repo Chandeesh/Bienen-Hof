@@ -25,6 +25,11 @@ const userSchema = new Schema({
     timestamp: {
         type: String,
         required: true
+    },
+    resetPasswordToken: {
+        type: String,
+        required: false,
+        default: ""
     }
 });
 

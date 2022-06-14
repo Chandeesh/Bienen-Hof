@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 module.exports = {
 
-    sendMail: (emailId, token) => {
+    sendMail: (emailId, token, endPoint) => {
         const transporter = nodemailer.createTransport({
             port: 465,               // true for 465, false for other ports
             host: "smtp.mail.yahoo.com",
@@ -17,7 +17,7 @@ module.exports = {
             to: emailId,   // list of receivers
             subject: 'Activate your account',
             text: 'Please click on the link to activate to your account and then login',
-            html: 'http://localhost:5000/bienen/user/confirm?token=' + token,
+            html: 'http://localhost:8080/' +endPoint+ 'token=' + token,
         };
 
         try {

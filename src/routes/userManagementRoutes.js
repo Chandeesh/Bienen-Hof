@@ -15,4 +15,12 @@ module.exports = (app) => {
 
   app.get('/bienen/user/verifyToken', userController.verify);
 
+  app.get('/bienen/user/home', userController.home);
+
+  app.put('/bienen/user/initiateresetpassword', userController.initiateResetPassword);
+
+  app.get('/bienen/user/confirmresetpassword', userController.confirmResetPassword);
+
+  app.put('/bienen/user/updatepassword', userController.updatePassword);
+
 };
