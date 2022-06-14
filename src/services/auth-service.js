@@ -29,9 +29,39 @@ const activate = (activationToken) => {
 const logout = () => {
     localStorage.removeItem("user");
 };
+
+const initiateResetPassword = (emailId) => {
+    return axios.put(API_URL + 'initiateresetpassword', {
+        emailId
+    })
+    .then((response) => {
+        return response;
+    });
+};
+
+const verifyPassword = (verificationToken) => {
+    return axios.get(API_URL + 'confirmresetpassword',{ params: { token: verificationToken } })
+    .then((response) => {
+        return response;
+    });
+};
+
+const updatePassword = (emailId, password) => {
+    return axios.put(API_URL + 'updatepassword', {
+        emailId,    
+        password
+    })
+    .then((response) => {
+        return response;
+    });
+};
+
 export default {
     register,
     login,
     logout,
-    activate
+    activate,
+    initiateResetPassword,
+    verifyPassword,
+    updatePassword
 };

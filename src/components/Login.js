@@ -4,10 +4,11 @@ import { Redirect } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { login } from "../actions/auth";
+import { initiateResetPassword, login } from "../actions/auth";
 import { useTranslation } from 'react-i18next';
-import { t } from "i18next";
-
+import {
+  Button, Modal, Form as ModalForm
+} from "react-bootstrap";
 const required = (value) => {
   if (!value) {
     return (
@@ -18,8 +19,9 @@ const required = (value) => {
   }
 };
 const Login = (props) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation() // Also works 😉
   const form = useRef();
+  const modalForm = useRef();
   const checkBtn = useRef();
   const [emailId, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -27,10 +29,21 @@ const Login = (props) => {
   const { isLoggedIn } = useSelector(state => state.auth);
   const { message } = useSelector(state => state.message);
   const dispatch = useDispatch();
+  const [showResetPassword, setShowResetPassword] = useState(false);
+  const handleShowResetPasswordOn = () => setShowResetPassword(true);
+  const handleShowResetPasswordOff = () => setShowResetPassword(false);
+  const [emailIdForgotPwd, setEmailId] = useState("");
+
   const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
   };
+
+  const onChangeEmailPwd = (e) => {
+    const emailId = e.target.value;
+    setEmailId(emailId);
+  };
+
   const onChangePassword = (e) => {
     const password = e.target.value;
     setPassword(password);
@@ -52,6 +65,21 @@ const Login = (props) => {
       setLoading(false);
     }
   };
+
+  const handleResetPassword = (e) => {
+    e.preventDefault();
+
+    dispatch(initiateResetPassword(emailIdForgotPwd))
+      .then((res) => {
+        console.log(res);
+        setShowResetPassword(false)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+  };
+
   if (isLoggedIn) {
     return <Redirect to="/profile" />;
   }
@@ -88,17 +116,18 @@ const Login = (props) => {
           </div>
           <div className="form-group" >
             <label htmlFor="password"></label>
-            <a href="password">{t("forgotPassword")}</a>
+            <a href="#">
+              <div onClick={handleShowResetPasswordOn}>{t("forgotPassword")}</div></a>
             <label htmlFor="password"></label>
             <button className="btn btn-warning btn-block" disabled={loading}>
               {loading && (
-                <span className="spinner-border spinner-border-sm"></span>
-              )}
+                <span className="spinner-border spinner-grow-sm"></span>
+              )}{'     '}
               <span>{t("login")}</span>
             </button>
           </div>
           {message && (
-            <div className="form-group">
+            <div className="form-group" style={{ paddingTop: '15px' }}>
               <div className="alert alert-danger" role="alert">
                 {message}
               </div>
@@ -107,6 +136,32 @@ const Login = (props) => {
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
       </div>
+      <Modal show={showResetPassword} onHide={handleShowResetPasswordOff}>
+        <Modal.Header closeButton>
+          <Modal.Title>Enter your email address</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ModalForm ref={modalForm}>
+            <ModalForm.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <ModalForm.Label>Email</ModalForm.Label>
+              <ModalForm.Control value={emailIdForgotPwd}
+                onChange={onChangeEmailPwd}
+                placeholder="email address"
+                autoFocus
+              />
+            </ModalForm.Group>
+          </ModalForm>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="warning" onClick={handleShowResetPasswordOff}>
+            Close
+          </Button>
+          <Button variant="warning" onClick={handleResetPassword}>
+            Update
+          </Button>
+
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

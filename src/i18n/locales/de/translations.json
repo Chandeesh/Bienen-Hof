@@ -17,5 +17,10 @@
     "username": "Benutzername",
     "password": "Kennwort",
     "forgotPassword": "Kennwort vergessen?",
-    "noAccount": "Haben Sie noch kein Konto?"
+    "noAccount": "Haben Sie noch kein Konto?",
+    "overview": "Übersicht",
+    "contacts": "Kontakte",
+    "mails": "Mails",
+    "settings": "Einstellungen",
+    "logOut": "Abmeldung"
 }

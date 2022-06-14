@@ -21,9 +21,9 @@ const Home = () => {
     );
   }, []);
   return (
-    <div>
+    <div className="col-md-12">
 
-      <div class="container marketing" style={{ paddingTop: 50 }}>
+      <div class="container marketing" style={{ paddingTop: 50}}>
         <div class="row">
           <div class="row featurette">
             <div class="col-md-7">
@@ -37,7 +37,7 @@ const Home = () => {
                 y="0"
                 enableBackground="new 0 0 512 512"
                 version="1.1"
-                viewBox="0 0 512 512"
+                viewBox="0 0 800 512"
                 xmlSpace="preserve"
               >
                 <path
@@ -69,7 +69,7 @@ const Home = () => {
                 y="0"
                 enableBackground="new 0 0 512 512"
                 version="1.1"
-                viewBox="0 0 512 512"
+                viewBox="0 0 800 512"
                 xmlSpace="preserve"
               >
                 <path
@@ -103,7 +103,7 @@ const Home = () => {
                 y="0"
                 enableBackground="new 0 0 511.999 511.999"
                 version="1.1"
-                viewBox="0 0 511.999 511.999"
+                viewBox="0 0 800 511.999"
                 xmlSpace="preserve"
               >
                 <g fill="#754F1E">
@@ -156,7 +156,7 @@ const Home = () => {
                 y="0"
                 enableBackground="new 0 0 512 512"
                 version="1.1"
-                viewBox="0 0 512 512"
+                viewBox="0 0 800 512"
                 xmlSpace="preserve"
               >
                 <g fill="#FFE100">

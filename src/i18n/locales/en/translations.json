@@ -14,8 +14,13 @@
     "basicBeekeepingContent": "Would you like to get introduced to the world of Beekeeping and like to gain information about the basic works? Then hit the signup button to know details such as dealing with bees, hiking, feeding, wax and honeycob and much more",
     "contact": "Contact",
     "footerContent": "Re Engineering of Deutscher ImkerBund App to a Web App using React JS and Fastify for the fulfillment of Master Thesis by Hof University Student - Chandeesh",
-    "username": "username",
-    "password": "password",
+    "username": "Username",
+    "password": "Password",
     "forgotPassword": "Forgot Password?",
-    "noAccount": "Don't have an account yet?"
+    "noAccount": "Don't have an account yet?",
+    "overview": "Overview",
+    "contacts": "Contacts",
+    "mails": "Mails",
+    "settings": "Settings",
+    "logOut": "Logout"
   }

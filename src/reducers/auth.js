@@ -3,7 +3,7 @@ import {
     REGISTER_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGOUT,
+    LOGOUT
 } from "../actions/type";
 const user = JSON.parse(localStorage.getItem("user"));
 const initialState = user
